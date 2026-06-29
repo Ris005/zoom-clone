@@ -13,11 +13,14 @@ services:
     healthCheckPath: /api/health
     autoDeploy: true
     envVars:
-      - key: DEBUG
-        value: "false"
-      # JSON array of allowed SPA origins, e.g. ["https://zoomclone-web.onrender.com"]
-      - key: CORS_ORIGINS
-        sync: false
+    - key: PYTHON_VERSION
+      value: "3.11.10"
+
+    - key: DEBUG
+      value: "false"
+
+    - key: CORS_ORIGINS
+      sync: false
 
   # ---- Frontend: Next.js (Node web service) ----
   - type: web
