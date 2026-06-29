@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.db
+
+# Node / Next
+node_modules/
+.next/
+out/
+.env.local
+
+# Misc
+.DS_Store
+*.log

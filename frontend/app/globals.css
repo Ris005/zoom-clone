@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App-wide resets. The dashboard is light (like zoom.us/wc), the meeting room
+   is dark (like an in-call window); pages opt into the dark surface themselves. */
+html, body {
+  padding: 0;
+  margin: 0;
+  background: #f7f9fc;
+  color: #1a1a1a;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}

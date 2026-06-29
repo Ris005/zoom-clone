@@ -1,0 +1,34 @@
+# Render Blueprint — deploys the FastAPI backend and the Next.js frontend.
+# Dashboard → New → Blueprint → select this repo → Apply.
+# After applying, set the two `sync: false` secrets (see DEPLOYMENT.md §3).
+services:
+  # ---- Backend: FastAPI (Python web service) ----
+  - type: web
+    name: zoomclone-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt && python -m app.seed
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: DEBUG
+        value: "false"
+      # JSON array of allowed SPA origins, e.g. ["https://zoomclone-web.onrender.com"]
+      - key: CORS_ORIGINS
+        sync: false
+
+  # ---- Frontend: Next.js (Node web service) ----
+  - type: web
+    name: zoomclone-web
+    runtime: node
+    rootDir: frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      # Build-time: must be set before the first build. e.g. https://zoomclone-api.onrender.com
+      - key: NEXT_PUBLIC_API_URL
+        sync: false
